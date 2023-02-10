@@ -1713,17 +1713,6 @@ class FunkinLua {
 			}
 			luaTrace("Lua sprite with tag: " + tag + " doesn't exist!");
 		});
-		Lua_helper.add_callback(lua, "addGlitchEffect", function(camera:String,waveSpeed:Float = 0.1,waveFrq:Float = 0.1,waveAmp:Float = 0.1) {
-			
-			PlayState.instance.addShaderToCamera(camera, new GlitchEffect(waveSpeed,waveFrq,waveAmp));
-			
-		}); // have you tried a soup full of shaders????
-
-		Lua_helper.add_callback(lua, "addBlockedGlitchEffect", function(camera:String,waveSpeed:Float = 0.1,waveFrq:Float = 0.1,waveAmp:Float = 0.1) {
-			
-			PlayState.instance.addShaderToCamera(camera, new BlockedGlitchEffect(waveSpeed,waveFrq,waveAmp));
-			
-		}); // have you tried a soup full of shaders????
 		
 		Lua_helper.add_callback(lua, "musicFadeIn", function(duration:Float, fromValue:Float = 0, toValue:Float = 1) {
 			FlxG.sound.music.fadeIn(duration, fromValue, toValue);

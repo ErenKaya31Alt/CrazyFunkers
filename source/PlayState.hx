@@ -134,8 +134,8 @@ class PlayState extends MusicBeatState
 	//Handles the new epic mega sexy cam code that i've done
 	private var camFollow:FlxPoint;
 	private var camFollowPos:FlxObject;
-	private static var prevCamFollow:FlxPoint;
-	private static var prevCamFollowPos:FlxObject;
+	private static var prevcamFollow:FlxPoint;
+	private static var prevcamFollowPos:FlxObject;
 
 	public var strumLineNotes:FlxTypedGroup<StrumNote>;
 	public var opponentStrums:FlxTypedGroup<StrumNote>;
@@ -979,16 +979,16 @@ class PlayState extends MusicBeatState
 		camFollow = new FlxPoint();
 		camFollowPos = new FlxObject(0, 0, 1, 1);
 
-		snapCamFollowToPos(camPos.x, camPos.y);
-		if (prevCamFollow != null)
+		snapcamFollowToPos(camPos.x, camPos.y);
+		if (prevcamFollow != null)
 		{
-			camFollow = prevCamFollow;
-			prevCamFollow = null;
+			camFollow = prevcamFollow;
+			prevcamFollow = null;
 		}
-		if (prevCamFollowPos != null)
+		if (prevcamFollowPos != null)
 		{
-			camFollowPos = prevCamFollowPos;
-			prevCamFollowPos = null;
+			camFollowPos = prevcamFollowPos;
+			prevcamFollowPos = null;
 		}
 		add(camFollowPos);
 
@@ -1110,7 +1110,7 @@ class PlayState extends MusicBeatState
 					whiteScreen.scrollFactor.set();
 					whiteScreen.blend = ADD;
 					camHUD.visible = false;
-					snapCamFollowToPos(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+					snapcamFollowToPos(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
 					inCutscene = true;
 
 					FlxTween.tween(whiteScreen, {alpha: 0}, 1, {
@@ -1141,7 +1141,7 @@ class PlayState extends MusicBeatState
 						}
 					});
 					FlxG.sound.play(Paths.sound('Lights_Turn_On'));
-					snapCamFollowToPos(400, -2050);
+					snapcamFollowToPos(400, -2050);
 					FlxG.camera.focusOn(camFollow);
 					FlxG.camera.zoom = 1.5;
 
@@ -3111,7 +3111,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function snapCamFollowToPos(x:Float, y:Float) {
+	function snapcamFollowToPos(x:Float, y:Float) {
 		camFollow.set(x, y);
 		camFollowPos.setPosition(x, y);
 	}
@@ -3262,8 +3262,8 @@ class PlayState extends MusicBeatState
 					FlxTransitionableState.skipNextTransIn = true;
 					FlxTransitionableState.skipNextTransOut = true;
 
-					prevCamFollow = camFollow;
-					prevCamFollowPos = camFollowPos;
+					prevcamFollow = camFollow;
+					prevcamFollowPos = camFollowPos;
 
 					PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0] + difficulty, PlayState.storyPlaylist[0]);
 					FlxG.sound.music.stop();
@@ -3827,7 +3827,7 @@ class PlayState extends MusicBeatState
 		} else if(!note.noAnimation) {
 			var altAnim:String = "";
 
-			if(ClientPrefs.camfollow && !note.isSustainNote) {
+			if(ClientPrefs.camFollow && !note.isSustainNote) {
 				switch (Std.int(Math.abs(note.noteData)))
 				{
 					case 0: // left
@@ -3893,7 +3893,7 @@ class PlayState extends MusicBeatState
 
 			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
 
-			if(ClientPrefs.camfollow && !note.isSustainNote) {
+			if(ClientPrefs.camFollow && !note.isSustainNote) {
 				switch (Std.int(Math.abs(note.noteData)))
 				{
 					case 0: // left
