@@ -66,6 +66,9 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X = 42;
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
+	public static var cameramovingoffset = 20;
+	public static var cameramovingoffsetbf = 20; // idk why i made literally same variable
+
 	public static var ratingStuff:Array<Dynamic> = [
 		['its not overcharted you are just bad!', 0.2], //From 0% to 19%
 		['poop sack', 0.4], //From 20% to 39%
