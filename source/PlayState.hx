@@ -67,16 +67,16 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['You Suck!', 0.2], //From 0% to 19%
-		['Shit', 0.4], //From 20% to 39%
-		['Bad', 0.5], //From 40% to 49%
-		['Bruh', 0.6], //From 50% to 59%
-		['Meh', 0.69], //From 60% to 68%
-		['Nice', 0.7], //69%
-		['Good', 0.8], //From 70% to 79%
-		['Great', 0.9], //From 80% to 89%
-		['Sick!', 1], //From 90% to 99%
-		['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['its not overcharted you are just bad!', 0.2], //From 0% to 19%
+		['poop sack', 0.4], //From 20% to 39%
+		['skill issue', 0.5], //From 40% to 49%
+		['bruh momento', 0.6], //From 50% to 59%
+		['Bleh', 0.69], //From 60% to 68%
+		['69', 0.7], //69%
+		['Goodie', 0.8], //From 70% to 79%
+		['Wowie', 0.9], //From 80% to 89%
+		['Wow!', 1], //From 90% to 99%
+		['COOLIO!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
 	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>();
@@ -3827,20 +3827,6 @@ class PlayState extends MusicBeatState
 		} else if(!note.noAnimation) {
 			var altAnim:String = "";
 
-			if(ClientPrefs.camFollow && !note.isSustainNote) {
-				switch (Std.int(Math.abs(note.noteData)))
-				{
-					case 0: // left
-						camFollow.x -= aValue;
-					case 1: // down
-						camFollow.y += aValue;
-					case 2: // up
-						camFollow.y -= aValue;
-					case 3: // right
-						camFollow.x += aValue;
-				}
-			}
-
 			var curSection:Int = Math.floor(curStep / 16);
 			if (SONG.notes[curSection] != null)
 			{
@@ -3854,6 +3840,28 @@ class PlayState extends MusicBeatState
 			if(note.gfNote) {
 				char = gf;
 			}
+
+			if(SONG.notes[Math.floor(curStep / 16)].mustHitSection == false && !note.isSustainNote)
+				{
+					if (!dad.stunned)
+						{
+							switch(Std.int(Math.abs(note.noteData)))
+							{
+								case 0:
+									camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+									camFollow.x += dad.cameraPosition[0] - cameramovingoffset; camFollow.y += dad.cameraPosition[1];
+								case 1:
+									camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+									camFollow.x += dad.cameraPosition[0]; camFollow.y += dad.cameraPosition[1] + cameramovingoffset;
+								case 2:
+									camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+									camFollow.x += dad.cameraPosition[0]; camFollow.y += dad.cameraPosition[1] - cameramovingoffset;
+								case 3:							
+									camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+									camFollow.x += dad.cameraPosition[0] + cameramovingoffset; camFollow.y += dad.cameraPosition[1];
+							}                   
+						}
+				}
 
 			if(char != null)
 			{
@@ -3889,20 +3897,6 @@ class PlayState extends MusicBeatState
 			if (ClientPrefs.hitsoundVolume > 0 && !note.hitsoundDisabled)
 			{
 				FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.hitsoundVolume);
-			}
-
-			if(ClientPrefs.camFollow && !note.isSustainNote) {
-				switch (Std.int(Math.abs(note.noteData)))
-				{
-					case 0: // left
-						camFollow.x -= aValue;
-					case 1: // down
-						camFollow.y += aValue;
-					case 2: // up
-						camFollow.y -= aValue;
-					case 3: // right
-						camFollow.x += aValue;
-				}
 			}
 
 			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
@@ -3957,6 +3951,25 @@ class PlayState extends MusicBeatState
 				{
 					boyfriend.playAnim(animToPlay + daAlt, true);
 					boyfriend.holdTimer = 0;
+
+						if(SONG.notes[Math.floor(curStep / 16)].mustHitSection == true && !note.isSustainNote){
+							if (!boyfriend.stunned){
+								switch(Std.int(Math.abs(note.noteData))){				 
+									case 0:
+										camFollow.set(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y - 100);
+										camFollow.x += boyfriend.cameraPosition[0] - cameramovingoffsetbf; camFollow.y += boyfriend.cameraPosition[1];	
+									case 1:
+										camFollow.set(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y - 100);
+										camFollow.x += boyfriend.cameraPosition[0]; camFollow.y += boyfriend.cameraPosition[1] + cameramovingoffsetbf;			
+									case 2:
+										camFollow.set(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y - 100);
+										camFollow.x += boyfriend.cameraPosition[0]; camFollow.y += boyfriend.cameraPosition[1] - cameramovingoffsetbf;
+									case 3:							
+										camFollow.set(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y - 100);
+										camFollow.x += boyfriend.cameraPosition[0] + cameramovingoffsetbf; camFollow.y += boyfriend.cameraPosition[1];			
+								}                        
+							}
+						}
 				}
 
 				if(note.noteType == 'Hey!') {
