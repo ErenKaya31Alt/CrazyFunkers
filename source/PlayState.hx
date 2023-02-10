@@ -3891,8 +3891,6 @@ class PlayState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.hitsoundVolume);
 			}
 
-			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
-
 			if(ClientPrefs.camFollow && !note.isSustainNote) {
 				switch (Std.int(Math.abs(note.noteData)))
 				{
@@ -3906,6 +3904,8 @@ class PlayState extends MusicBeatState
 						camFollow.x += aValue;
 				}
 			}
+
+			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
 
 			if(note.hitCausesMiss) {
 				noteMiss(note);
