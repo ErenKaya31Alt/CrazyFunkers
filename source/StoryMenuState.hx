@@ -172,6 +172,7 @@ class StoryMenuState extends MusicBeatState
 
 		var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, bgSprite.y + 425).loadGraphic(Paths.image('Menu_Tracks'));
 		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
+		tracksSprite.screenCenter(X);
 		add(tracksSprite);
 
 		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
@@ -340,8 +341,8 @@ class StoryMenuState extends MusicBeatState
 		{
 			sprDifficulty.loadGraphic(newImage);
 			sprDifficulty.x = leftArrow.x + 60;
-			//sprDifficulty.x += (308 - sprDifficulty.width) / 3;
-			sprDifficulty.screenCenter(X);
+			sprDifficulty.x += (308 - sprDifficulty.width) / 3;
+			//sprDifficulty.screenCenter(X);
 			sprDifficulty.alpha = 0;
 			sprDifficulty.y = leftArrow.y - 15;
 

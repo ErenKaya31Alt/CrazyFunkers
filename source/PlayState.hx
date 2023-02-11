@@ -904,6 +904,7 @@ class PlayState extends MusicBeatState
 		timeBarBG.color = FlxColor.BLACK;
 		timeBarBG.xAdd = -4;
 		timeBarBG.yAdd = -4;
+		timeBarBG.screenCenter(X);
 
 		timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
 			'songPercent', 0, 1);
@@ -911,6 +912,7 @@ class PlayState extends MusicBeatState
 		timeBar.createFilledBar(0xFF828282, 0xFF00FF00); // vdab time
 		timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
 		timeBar.alpha = 0;
+		timeBar.screenCenter(X);
 		timeBar.visible = showTime;
 		add(timeBar);
 		add(timeBarBG);
