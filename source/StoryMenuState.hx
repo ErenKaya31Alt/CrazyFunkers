@@ -341,7 +341,7 @@ class StoryMenuState extends MusicBeatState
 			sprDifficulty.loadGraphic(newImage);
 			sprDifficulty.x = leftArrow.x + 60;
 			//sprDifficulty.x += (308 - sprDifficulty.width) / 3;
-			screenCenter(sprDifficulty)
+			screenCenter(sprDifficulty);
 			sprDifficulty.alpha = 0;
 			sprDifficulty.y = leftArrow.y - 15;
 
