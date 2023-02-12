@@ -45,7 +45,7 @@ class CreditsState extends MusicBeatState
 		#end
 
 		persistentUpdate = true;
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg = new FlxSprite().loadGraphic(MainMenuState.randomizeBG());
 		add(bg);
 		bg.screenCenter();
 		
@@ -81,6 +81,14 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+			['Omlets Torture Development'],
+			['KdjTheCoolGuy123',		'kdj',		'Owner of Omlets Torture',							'https://www.youtube.com/@kdjtherealguy',	'FF0000'],
+			['BobbbyOfficial',		'bobbby',		'Composer',							'https://www.youtube.com/@bobbbyofficial',	'FFFFFF'],
+			['Eren Kaya',		'eren',		'Charter, Visualizer, Main programmer, Artist (not at all), Animator',							'https://www.youtube.com/@ErenKayaFNF',	'FFFFFF'],
+			['Alexdima',		'alex',		'Owner of Alex',							'https://youtube.com/@alexdimatv5722',	'0000FF'],
+			['Matixd',		'mati',		'Owner of Mati',							'https://omlet.gg/profile/matixd_candy',	'6B348D'],
+			['VulpixGamerita',		'vulpix',		'Owner of Vulpix',							'https://omlet.gg/profile/vulpixgamerita',	'FFAA00'],
+			['Iloveseek69420',		'seek',		'Composer',							'https://omlet.gg/profile/yourlocalseek69',	'FFFF67'],
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',							'https://twitter.com/Shadow_Mario_',	'444444'],
 			['RiverOaken',			'riveroaken',		'Main Artist/Animator of Psych Engine',						'https://twitter.com/RiverOaken',		'C30085'],

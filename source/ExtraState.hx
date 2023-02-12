@@ -34,14 +34,9 @@ class MainMenuState extends MusicBeatState
 	private var camAchievement:FlxCamera;
 	
 	var optionShit:Array<String> = [
-		'story_mode',
-		'freeplay',
-		//#if MODS_ALLOWED 'mods', #end
-		//#if ACHIEVEMENTS_ALLOWED 'awards', #end
-		//'credits',
-		'extras',
-		//#if !switch 'donate', #end
-		'options'
+		'discord',
+        'youtube',
+        'omlet'
 	];
 
 	var magenta:FlxSprite;
@@ -51,7 +46,7 @@ class MainMenuState extends MusicBeatState
 
 	public static var bgPaths:Array<String> = 
 	[
-		'backgrounds/',
+		'backgrounds/kdjAmongus',
 		'backgrounds/',
 		'backgrounds/',
 		'backgrounds/',
@@ -218,10 +213,18 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (optionShit[curSelected] == 'donate')
+				if (optionShit[curSelected] == 'discord')
 				{
-					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
+					CoolUtil.browserLoad('https://discord.gg/2tj9UuAVBC');
 				}
+                if (optionShit[curSelected] == 'youtube')
+                {
+                    CoolUtil.browserLoad('https://www.youtube.com/@kdjtherealguy');
+                }
+                if (optionShit[curSelected] == 'omlet')
+                {
+                    CoolUtil.browserLoad('https://omlet.gg/profile/kdjthesecondnew');
+                }
 				else
 				{
 					selectedSomethin = true;
