@@ -1054,7 +1054,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
-		watermarkTxt = new FlxText(4, healthBarBG.y + 50, 0, Paths.formatToSongPath(songName) + " | " + engineNames + " Engine (PE " + MainMenuState.psychEngineVersion + ")", 16);
+		watermarkTxt = new FlxText(4, healthBarBG.y + 60, 0, Paths.formatToSongPath(songName) + " | " + engineNames + " Engine (PE " + MainMenuState.psychEngineVersion + ")", 16);
 		watermarkTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		watermarkTxt.scrollFactor.set();
 		watermarkTxt.borderSize = 1.25;
