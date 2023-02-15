@@ -69,6 +69,8 @@ class PlayState extends MusicBeatState
 	public static var cameramovingoffset = 20;
 	public static var cameramovingoffsetbf = 20; // idk why i made literally same variable
 
+	var engineNames:String = '';
+
 	public static var ratingStuff:Array<Dynamic> = [
 		['its not overcharted you are just bad!', 0.2], //From 0% to 19%
 		['poop sack', 0.4], //From 20% to 39%
@@ -855,6 +857,10 @@ class PlayState extends MusicBeatState
 			case 'schoolEvil':
 				var evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069); //nice
 				insert(members.indexOf(dadGroup) - 1, evilTrail);
+
+			case 'demolition' | 'streets':
+				var evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069); //nice
+				insert(members.indexOf(dadGroup) - 1, evilTrail);
 		}
 
 		var file:String = Paths.json(songName + '/dialogue'); //Checks for json/Psych Engine dialogue
@@ -1045,6 +1051,12 @@ class PlayState extends MusicBeatState
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
+
+		watermarkTxt = new FlxText(4, healthBarBG.y + 50, 0, Paths.formatToSongPath(songName) + " | " + engineNames + " Engine (PE " + MainMenuState.psychEngineVersion + ")", 16);
+		watermarkTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		watermarkTxt.scrollFactor.set();
+		watermarkTxt.borderSize = 1.25;
+		add(watermarkTxt);
 
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -2186,6 +2198,23 @@ class PlayState extends MusicBeatState
 		}*/
 
 		callOnLuas('onUpdate', [elapsed]);
+
+		switch(Paths.formatToSongPath(songName)) {
+			case 'coolness':
+				engineNames = 'Kdj';
+			case 'freaky':
+				engineNames = 'Bobbby';
+			case 'moon-light':
+				engineNames = 'Alexdima';
+			case 'peace':
+				engineNames = 'Mati';
+			case 'grinder':
+				engineNames = 'Vulpix';
+			case 'ligma':
+				engineNames = 'Crazy Guy';
+			case 'toilet':
+				engineNames = 'Samux';
+		}
 
 		switch (curStage)
 		{
@@ -3822,7 +3851,7 @@ class PlayState extends MusicBeatState
 
 	function opponentNoteHit(note:Note):Void
 	{
-		if (Paths.formatToSongPath(SONG.song) != 'tutorial')
+		if (Paths.formatToSongPath(SONG.song) != 'teaching')
 			camZooming = true;
 
 		if(note.noteType == 'Hey!' && dad.animOffsets.exists('hey')) {
