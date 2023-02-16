@@ -860,7 +860,7 @@ class PlayState extends MusicBeatState
 				var evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069); //nice
 				insert(members.indexOf(dadGroup) - 1, evilTrail);
 
-			case 'demolition' | 'streets':
+			case 'demolition':
 				var evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069); //nice
 				insert(members.indexOf(dadGroup) - 1, evilTrail);
 		}
@@ -1016,13 +1016,14 @@ class PlayState extends MusicBeatState
 		moveCameraSection(0);
 
 		healthBarBG = new AttachedSprite('healthBar');
-		healthBarBG.y = FlxG.height * 0.89;
+		healthBarBG.y = FlxG.height * 0.9;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
 		healthBarBG.visible = !ClientPrefs.hideHud;
-		healthBarBG.xAdd = -4;
-		healthBarBG.yAdd = -4;
-		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
+		//healthBarBG.xAdd = -4;
+		//healthBarBG.yAdd = -4;
+		if(ClientPrefs.downScroll)
+			healthBarBG.y = 50;
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
@@ -1047,14 +1048,16 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 		reloadHealthBarColors();
 
-		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
+		scoreTxt = new FlxText(0, healthBarBG.y + 40, FlxG.width, "", 20);
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
-		scoreTxt.borderSize = 1.25;
+		scoreTxt.borderSize = 1.5;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
-
-		watermarkTxt = new FlxText(4, healthBarBG.y + 50, 0, Paths.formatToSongPath(songName) + " | " + engineNames + " Engine (PE " + MainMenuState.psychEngineVersion + ")", 16);
+				
+		var texts:Array<String> = ["Kdj", "Bobbby", "Alexdima", "Mati", "Vulpix", "ILoveseek", "Eren", "Samux"]; // place here strings, and separated by comas
+		var daRandomInt:Int = FlxG.random.int(0, texts.length-1);
+		watermarkTxt = new FlxText(4, healthBarBG.y + 55, 0, Paths.formatToSongPath(songName) + " | " + texts[daRandomInt] + " Engine (PE " + MainMenuState.psychEngineVersion + ")", 16);
 		watermarkTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		watermarkTxt.scrollFactor.set();
 		watermarkTxt.borderSize = 1.25;
@@ -1078,6 +1081,7 @@ class PlayState extends MusicBeatState
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
+		watermarkTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
@@ -2201,6 +2205,7 @@ class PlayState extends MusicBeatState
 
 		callOnLuas('onUpdate', [elapsed]);
 
+		/*
 		switch(Paths.formatToSongPath(SONG.song)) {
 			case 'coolness':
 				engineNames = 'Kdj';
@@ -2215,8 +2220,9 @@ class PlayState extends MusicBeatState
 			case 'ligma':
 				engineNames = 'Crazy Guy';
 			case 'toilet':
-				engineNames = 'Samux';
+				engineNames = 'Samux'; // doesnt even fucking work waaaaaa
 		}
+		*/
 
 		switch (curStage)
 		{
@@ -2346,9 +2352,9 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		if(ratingName == '?') {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName;
+			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 		} else {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
+			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 		}
 
 		if(botplayTxt.visible) {
@@ -4501,7 +4507,7 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
-			if (sicks > 0) ratingFC = "SFC";
+			if (sicks > 0) ratingFC = "PFC";
 			if (goods > 0) ratingFC = "GFC";
 			if (bads > 0 || shits > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
