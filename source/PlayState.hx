@@ -2352,17 +2352,12 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		if(ratingName == '?') {
-<<<<<<< HEAD
 			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 		} else {
 			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
-=======
-			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)';
-		} else {
-			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)';
->>>>>>> f2ca266742cf9f32f064b33c5e98bcc4a562190a
 		}
 
+        // fucking NI-
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
