@@ -2352,9 +2352,15 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		if(ratingName == '?') {
+<<<<<<< HEAD
 			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 		} else {
 			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+=======
+			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)';
+		} else {
+			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)';
+>>>>>>> f2ca266742cf9f32f064b33c5e98bcc4a562190a
 		}
 
 		if(botplayTxt.visible) {
