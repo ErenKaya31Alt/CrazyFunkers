@@ -1054,8 +1054,10 @@ class PlayState extends MusicBeatState
 		scoreTxt.borderSize = 1.5;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
-
-		watermarkTxt = new FlxText(4, healthBarBG.y + 60, 0, Paths.formatToSongPath(songName) + " | " + engineNames + " Engine (PE " + MainMenuState.psychEngineVersion + ")", 16);
+				
+		var texts:Array<String> = ["Kdj", "Bobbby", "Alexdima", "Mati", "Vulpix", "ILoveseek", "Eren", "Samux"]; // place here strings, and separated by comas
+		var daRandomInt:Int = FlxG.random.int(0, texts.length-1);
+		watermarkTxt = new FlxText(4, healthBarBG.y + 55, 0, Paths.formatToSongPath(songName) + " | " + texts[daRandomInt] + " Engine (PE " + MainMenuState.psychEngineVersion + ")", 16);
 		watermarkTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		watermarkTxt.scrollFactor.set();
 		watermarkTxt.borderSize = 1.25;
@@ -2203,6 +2205,7 @@ class PlayState extends MusicBeatState
 
 		callOnLuas('onUpdate', [elapsed]);
 
+		/*
 		switch(Paths.formatToSongPath(SONG.song)) {
 			case 'coolness':
 				engineNames = 'Kdj';
@@ -2217,8 +2220,9 @@ class PlayState extends MusicBeatState
 			case 'ligma':
 				engineNames = 'Crazy Guy';
 			case 'toilet':
-				engineNames = 'Samux';
+				engineNames = 'Samux'; // doesnt even fucking work waaaaaa
 		}
+		*/
 
 		switch (curStage)
 		{
