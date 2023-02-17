@@ -1016,7 +1016,7 @@ class PlayState extends MusicBeatState
 		moveCameraSection(0);
 
 		healthBarBG = new AttachedSprite('healthBar');
-		healthBarBG.y = FlxG.height * 0.9;
+		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
 		healthBarBG.visible = !ClientPrefs.hideHud;
@@ -1057,13 +1057,15 @@ class PlayState extends MusicBeatState
 				
 		var texts:Array<String> = ["Kdj", "Bobbby", "Alexdima", "Mati", "Vulpix", "ILoveseek", "Eren", "Samux"]; // place here strings, and separated by comas
 		var daRandomInt:Int = FlxG.random.int(0, texts.length-1);
-		watermarkTxt = new FlxText(4, healthBarBG.y + 55, 0, Paths.formatToSongPath(songName) + " | " + texts[daRandomInt] + " Engine (PE " + MainMenuState.psychEngineVersion + ")", 16);
+		watermarkTxt = new FlxText(4, healthBarBG.y + 55, 0, SONG.song + " | " + texts[daRandomInt] + " Engine (PE " + MainMenuState.psychEngineVersion + ")", 16);
 		watermarkTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		watermarkTxt.scrollFactor.set();
 		watermarkTxt.borderSize = 1.25;
 		add(watermarkTxt);
 
-		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+		var randomizerLol:Int = FlxG.random.int(0, texts.length-1);
+		var skillIssues:Array<String> = ["skill issue", "yoooo check this guy he playin on botplay lmao", "are you showcasing shit????", "only in oklahoma", "down in ohio. swag like ohio", "idk now", "go get some help", "FBI\nhim"];
+		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, skillIssues[randomizerLol], 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
