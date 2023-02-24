@@ -1055,7 +1055,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 				
-		var texts:Array<String> = ["Kdj", "Bobbby", "Alexdima", "Mati", "Vulpix", "ILoveseek", "Eren", "Samux"]; // place here strings, and separated by comas
+		var texts:Array<String> = ["Kdj", "Bobbby", "Alexdima", "Mati", "Vulpix", "ILoveseek", "Eren", "Samux", "GXGREAT"]; // place here strings, and separated by comas
 		var daRandomInt:Int = FlxG.random.int(0, texts.length-1);
 		watermarkTxt = new FlxText(4, healthBarBG.y + 55, 0, SONG.song + " | " + texts[daRandomInt] + " Engine (PE " + MainMenuState.psychEngineVersion + ")", 16);
 		watermarkTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -2226,6 +2226,12 @@ class PlayState extends MusicBeatState
 		}
 		*/
 
+		if (FlxG.keys.justPressed.SEVEN && Paths.formatToSongPath(SONG.song) == 'freaky')
+		{
+			SONG = Song.loadFromJson('demolition', 'demolition');
+			MusicBeatState.resetState();
+		}
+
 		switch (curStage)
 		{
 			case 'schoolEvil':
@@ -2355,6 +2361,12 @@ class PlayState extends MusicBeatState
 
 		if(ratingName == '?') {
 			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+		} else {
+			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+		}
+
+		if(!cpuControlled) {
+			scoreTxt.text = 'BOTPLAY DETECTED';
 		} else {
 			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 		}
@@ -4296,6 +4308,19 @@ class PlayState extends MusicBeatState
 		if(curStep == lastStepHit) {
 			return;
 		}
+
+		if (Paths.formatToSongPath(SONG.song) == 'freaky')
+			{
+				switch (curStep)
+				{
+					case 1412 | 1472:
+						defaultCamZoom += 0.2;
+					case 1416 | 1480:
+						defaultCamZoom += 0.4;
+					case 1424 | 1488:
+						defaultCamZoom -= 0.4;
+				}
+			}
 
 		lastStepHit = curStep;
 		setOnLuas('curStep', curStep);
