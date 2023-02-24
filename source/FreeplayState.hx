@@ -46,7 +46,7 @@ class FreeplayState extends MusicBeatState
 
 	private var CurrentSongIcon:FlxSprite;
 
-	private var AllPossibleSongs:Array<String> = ["main", "extra", "joke"];
+	private var AllPossibleSongs:Array<String> = ["main", "extra", "joke", "uh-oh"];
 
 	private var CurrentPack:Int = 0;
 
@@ -114,13 +114,14 @@ class FreeplayState extends MusicBeatState
 					addWeek(['Freaky'], 2, ['Bobbby']);
 					addWeek(['Moon Light'], 3, ['Alex']);
 					addWeek(['Peace'], 4, ['Mati']);
-					if(FlxG.save.data.bobbbyFound)
-				    	addWeek(['Demolition'], 0, ['BobbbyMad']);
 				case 'extra':
 					addWeek(['Grinder'], 5, ['Vulpix']);
 				case 'joke':
 					addWeek(['Toilet'], 7, ['Samux']);
-					addWeek(['Ligma'], 6, ['Eren']);
+					addWeek(['Ligma'], 6, ['crazy']);
+				case 'uh-oh':
+					addWeek(['Demolition'], 0, ['bobbbymad']);
+					addWeek(['Amolition'], 0, ['erenmad']);
 			}
 		}
 

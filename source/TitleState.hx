@@ -519,28 +519,26 @@ class TitleState extends MusicBeatState
 	}
 
 	function createCoolText(textArray:Array<String>, ?offset:Float = 0)
-	{
-		for (i in 0...textArray.length)
 		{
-			var money:Alphabet = new Alphabet(0, 0, textArray[i], true, false);
-			money.screenCenter(X);
-			money.y += (i * 60) + 200 + offset;
-			if(credGroup != null && textGroup != null) {
+			for (i in 0...textArray.length)
+			{
+				var money:FlxText = new FlxText(0, 0, FlxG.width, textArray[i], 48);
+				money.setFormat(Assets.getFont("assets/fonts/vcr.ttf").fontName, 48, FlxColor.WHITE, CENTER);
+				money.screenCenter(X);
+				money.y += (i * 60) + 200 + offset;
 				credGroup.add(money);
 				textGroup.add(money);
 			}
 		}
-	}
-
+	
 	function addMoreText(text:String, ?offset:Float = 0)
 	{
-		if(textGroup != null && credGroup != null) {
-			var coolText:Alphabet = new Alphabet(0, 0, text, true, false);
-			coolText.screenCenter(X);
-			coolText.y += (textGroup.length * 60) + 200 + offset;
-			credGroup.add(coolText);
-			textGroup.add(coolText);
-		}
+		var coolText:FlxText = new FlxText(0, 0, FlxG.width, text, 48);
+		coolText.setFormat(Assets.getFont("assets/fonts/vcr.ttf").fontName, 48, FlxColor.WHITE, CENTER);
+		coolText.screenCenter(X);
+		coolText.y += (textGroup.length * 60) + 200 + offset;
+		credGroup.add(coolText);
+		textGroup.add(coolText);
 	}
 
 	function deleteCoolText()
@@ -575,16 +573,17 @@ class TitleState extends MusicBeatState
 			{
 				case 1:
 					#if PSYCH_WATERMARKS
-					createCoolText(['Psych Engine by'], 15);
+					createCoolText(['Omlets Torture by'], 15);
 					#else
 					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
 				// credTextShit.visible = true;
 				case 3:
 					#if PSYCH_WATERMARKS
-					addMoreText('Shadow Mario', 15);
-					addMoreText('RiverOaken', 15);
-					addMoreText('shubs', 15);
+					addMoreText('KdjTheCoolGuy123', 15);
+					addMoreText('BobbbyOfficial', 15);
+					addMoreText('matixd_candy', 15);
+					addMoreText('AlexDima TV', 15);
 					#else
 					addMoreText('present');
 					#end
@@ -624,13 +623,13 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = "Friday";
 				// credTextShit.screenCenter();
 				case 13:
-					addMoreText('Friday');
+					addMoreText('Vs');
 				// credTextShit.visible = true;
 				case 14:
-					addMoreText('Night');
+					addMoreText('Omlets');
 				// credTextShit.text += '\nNight';
 				case 15:
-					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
+					addMoreText('Torture'); // credTextShit.text += '\nFunkin';
 
 				case 16:
 					skipIntro();

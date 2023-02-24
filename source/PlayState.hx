@@ -2365,11 +2365,11 @@ class PlayState extends MusicBeatState
 			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 		}
 
-		if(!cpuControlled) {
+		if(cpuControlled) {
 			scoreTxt.text = 'BOTPLAY DETECTED';
 		} else {
 			scoreTxt.text = 'Score:' + songScore + ' // Misses:' + songMisses + ' // Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
-		}
+		} // fixed
 
         // fucking NI-
 		if(botplayTxt.visible) {
