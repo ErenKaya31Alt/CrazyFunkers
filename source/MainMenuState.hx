@@ -93,7 +93,7 @@ class MainMenuState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-		checkeredBG = new FlxBackdrop(Paths.image('checkeredBG'), XY, 0.2, 0); // i dont understand i just put 0 lmao
+		checkeredBG = new FlxBackdrop(Paths.image('checkeredBG'), #if (flixel < "5.0.0") 1, 1, true, true, #else XY, #end 1, 1); // i dont understand i just put 0 lmao
 		checkeredBG.velocity.set(200, 110);
 		checkeredBG.updateHitbox();
 		checkeredBG.alpha = 0.5;
