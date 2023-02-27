@@ -119,12 +119,9 @@ class FreeplayState extends MusicBeatState
 				case 'joke':
 					addWeek(['Toilet'], 7, ['Samux']);
 					addWeek(['Ligma'], 6, ['crazy']);
-				if (FlxG.keys.justPressed.SEVEN) 
-				{
-					case 'uh-oh':
-						addWeek(['Demolition'], 0, ['bobbbymad']);
-						addWeek(['Amolition'], 0, ['erenmad']);
-				}
+				case 'uh-oh':
+					addWeek(['Demolition'], 0, ['bobbbymad']);
+					addWeek(['Amolition'], 0, ['erenmad']);
 			}
 		}
 
