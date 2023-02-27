@@ -2226,12 +2226,6 @@ class PlayState extends MusicBeatState
 		}
 		*/
 
-		if (FlxG.keys.justPressed.SEVEN && Paths.formatToSongPath(SONG.song) == 'freaky')
-		{
-			SONG = Song.loadFromJson('demolition', 'demolition');
-			MusicBeatState.resetState();
-		}
-
 		switch (curStage)
 		{
 			case 'schoolEvil':

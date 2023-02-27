@@ -59,7 +59,7 @@ class FreeplayState extends MusicBeatState
 		0xFF1900FF, // ALEX
 		0xFFBE00AF, // MATI
 		0xFFFFFB00, // VULPIX
-		0xFF0077FF, // EREN
+		0xFFFFFFFF, // EREN
 		0xFF4BFD80, // SAMUX
     ];
 
@@ -119,9 +119,12 @@ class FreeplayState extends MusicBeatState
 				case 'joke':
 					addWeek(['Toilet'], 7, ['Samux']);
 					addWeek(['Ligma'], 6, ['crazy']);
-				case 'uh-oh':
-					addWeek(['Demolition'], 0, ['bobbbymad']);
-					addWeek(['Amolition'], 0, ['erenmad']);
+				if (FlxG.keys.justPressed.SEVEN) 
+				{
+					case 'uh-oh':
+						addWeek(['Demolition'], 0, ['bobbbymad']);
+						addWeek(['Amolition'], 0, ['erenmad']);
+				}
 			}
 		}
 

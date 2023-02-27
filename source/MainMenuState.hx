@@ -30,6 +30,8 @@ class MainMenuState extends MusicBeatState
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
+	var swagShader:ColorSwap = null;
+	var checkeredBG:FlxBackdrop;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
 	
@@ -78,6 +80,8 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
+		swagShader = new ColorSwap();
+
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(randomizeBG());
 		bg.scrollFactor.set(0, yScroll);
@@ -86,6 +90,14 @@ class MainMenuState extends MusicBeatState
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
+
+		checkeredBG = new FlxBackdrop(Paths.image('checkeredBG'), 0.2, 0, true, true);
+		checkeredBG.velocity.set(200, 110);
+		checkeredBG.updateHitbox();
+		checkeredBG.alpha = 0.5;
+		checkeredBG.screenCenter(X);
+		add(checkeredBG);
+		checkeredBG.shader = swagShader.shader;
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		camFollowPos = new FlxObject(0, 0, 1, 1);
@@ -189,6 +201,13 @@ class MainMenuState extends MusicBeatState
 
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
+
+
+		if(swagShader != null)
+			{
+				if(controls.UI_LEFT) swagShader.hue -= elapsed * 0.1;
+				if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
+			}
 
 		if (!selectedSomethin)
 		{
