@@ -5,7 +5,6 @@ import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
-import lime.utils.Assets;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
@@ -111,17 +110,6 @@ class CoolUtil
 			dumbArray.push(i);
 		}
 		return dumbArray;
-	}
-
-	public static function coolTextFile(path:String):Array<String>
-	{
-		var daList:Array<String> = Assets.getText(path).trim().split('\n');
-	
-		for (i in 0...daList.length)
-		{
-			daList[i] = daList[i].trim();
-		}
-		return daList;
 	}
 
 	//uhhhh does this even work at all? i'm starting to doubt
