@@ -78,9 +78,9 @@ class OptionsState extends MusicBeatState
 			grpOptions.add(optionText);
 		}
 
-		selectorLeft:FlxText = new FlxText(0, 0, '>', true, false);
+		selectorLeft = new Alphabet(0, 0, '>', true, false);
 		add(selectorLeft);
-		selectorRight:FlxText = new FlxText(0, 0, '<', true, false);
+		selectorRight = new Alphabet(0, 0, '<', true, false);
 		add(selectorRight);
 
 		changeSelection();

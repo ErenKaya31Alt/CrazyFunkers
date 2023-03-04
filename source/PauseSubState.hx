@@ -338,7 +338,7 @@ class PauseSubState extends MusicBeatSubstate
 		}
 
 		for (i in 0...menuItems.length) {
-			var item:FlxText = new FlxText(0, 70 * i + 30, menuItems[i], true, false);
+			var item:FlxText = new FlxText(0, 0, 70 * i + 30, menuItems[i], true, false);
 			item.isMenuItem = true;
 			item.screenCenter(X);
 			//item.itemType = "D-Shape"; // buggy as hell
