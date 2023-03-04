@@ -1023,7 +1023,7 @@ class PlayState extends MusicBeatState
 		healthBarBG.xAdd = -4;
 		healthBarBG.yAdd = -4;
 		if(ClientPrefs.downScroll)
-			healthBarBG.y = 50;
+			healthBarBG.y = 50;	
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
@@ -2370,6 +2370,10 @@ class PlayState extends MusicBeatState
 			botplaySine += 180 * elapsed;
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
+
+		var mult:Float = FlxMath.lerp(1, timeTxt.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
+		timeTxt.scale.set(mult, mult);
+		timeTxt.updateHitbox();
 
 		if (controls.PAUSE && startedCountdown && canPause)
 		{

@@ -133,7 +133,7 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
+			var songText:FlxText = new FlxText(0, (70 * i) + 30, songs[i].songName, true, false);
 			songText.isMenuItem = false;
 			songText.itemType = "D-Shape";
 			songText.targetY = i;
@@ -453,12 +453,14 @@ public static function destroyFreeplayVocals() {
 		{
 			item.targetY = bullShit - curSelected;
 			bullShit++;
+			item.color = 0xFFFFFF;
 
 			item.alpha = 0.6;
 
 			if (item.targetY == 0)
 			{
 				item.alpha = 1;
+				item.color = 0x00FF00;
 			}
 		}
 		changeDiff();

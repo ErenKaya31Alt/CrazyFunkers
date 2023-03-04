@@ -1,10 +1,10 @@
 package openfl.display;
 
+import flixel.math.FlxMath;
 import haxe.Timer;
 import openfl.events.Event;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
-import flixel.math.FlxMath;
 #if gl_stats
 import openfl.display._internal.stats.Context3DStats;
 import openfl.display._internal.stats.DrawCallContext;
@@ -31,6 +31,8 @@ class FPS extends TextField
 		The current frame rate, expressed using frames-per-second
 	**/
 	public var currentFPS(default, null):Int;
+	private var currentMem:Float;
+	private var highestMem:Float;
 
 	@:noCompletion private var cacheCount:Int;
 	@:noCompletion private var currentTime:Float;
@@ -46,7 +48,7 @@ class FPS extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(Assets.getFont("assets/fonts/vcr.ttf").fontName, 14, color);
+		defaultTextFormat = new TextFormat(#if desktop Paths.font("font.ttf") #else "_sans" #end, 14, color);
 		autoSize = LEFT;
 		multiline = true;
 		text = "FPS: ";
@@ -80,29 +82,31 @@ class FPS extends TextField
 		currentFPS = Math.round((currentCount + cacheCount) / 2);
 		if (currentFPS > ClientPrefs.framerate) currentFPS = ClientPrefs.framerate;
 
-		if (currentCount != cacheCount /*&& visible*/)
+		if (currentCount != cacheCount)
 		{
 			text = "FPS: " + currentFPS;
-			var memoryMegas:Float = 0;
-			
-			#if openfl
-			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
-			text += "\nCPU: " + memoryMegas + " MB";
-			#end
-			
-			text += "\nOT v1.5";
 
-			textColor = 0xFFFFFFFF;
-			if (memoryMegas > 3000 || currentFPS <= ClientPrefs.framerate / 2)
+			if (Paths.formatToSongPath(SONG.song) == 'amolition' && Paths.formatToSongPath(SONG.song) == 'demolition')
 			{
-				textColor = 0xFFFF0000;
+				text = "FPS: -" + currentFPS + 81231;
+			} else {
+				text = "FPS: " + currentFPS;
 			}
 
-			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
-			text += "\ntotalDC: " + Context3DStats.totalDrawCalls();
-			text += "\nstageDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE);
-			text += "\nstage3DDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE3D);
+			#if openfl
+			currentMem = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
+			if(currentMem > highestMem)
+				highestMem = currentMem;
+			text += "\nMemory: " + currentMem + " MB";
+			text += "\nMem Peak: " + highestMem + " MB";
+			text += "\n OT v" + MainMenuState.omletsTortureVer;
 			#end
+
+			if (text != null || text != '')
+			{
+				if (Main.fpsVar != null)
+					Main.fpsVar.visible = true;
+			}
 
 			text += "\n";
 		}
