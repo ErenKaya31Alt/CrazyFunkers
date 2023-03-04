@@ -8,7 +8,6 @@ using StringTools;
 class LanguageManager
 {
 	public static var currentLocaleList:Array<String>;
-	public static var currentTerminalList:Array<String>; // terminal locale
 	public static var save:FlxSave;
 
 	public static function initSave()

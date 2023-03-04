@@ -5,6 +5,7 @@ import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
+import lime.utils.Assets;
 #if sys
 import sys.io.File;
 import sys.FileSystem;

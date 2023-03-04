@@ -118,6 +118,11 @@ class Paths
 		currentLevel = name.toLowerCase();
 	}
 
+	static public function langaugeFile():String
+	{
+		return getPath('locale/languages.txt', TEXT, 'preload');
+	}
+
 	public static function getPath(file:String, type:AssetType, ?library:Null<String> = null)
 	{
 		if (library != null)
