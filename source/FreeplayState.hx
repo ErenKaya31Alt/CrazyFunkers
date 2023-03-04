@@ -46,7 +46,8 @@ class FreeplayState extends MusicBeatState
 
 	private var CurrentSongIcon:FlxSprite;
 
-	private var AllPossibleSongs:Array<String> = ["main", "extra", "joke", "uh-oh"];
+	private var AllPossibleSongs:Array<String> = ["main", "extra", "joke", "oh no"];
+	private var nameAlpha:Alphabet;
 
 	private var CurrentPack:Int = 0;
 
@@ -90,6 +91,11 @@ class FreeplayState extends MusicBeatState
 
 		add(CurrentSongIcon);
 
+		nameAlpha = new Alphabet(40, (FlxG.height / 2) - 282, AllPossibleSongs[CurrentPack], true, false);
+		nameAlpha.screenCenter(X);
+		nameAlpha.load();
+		add(nameAlpha);
+
 		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
 		textBG.alpha = 0.6;
 		add(textBG);
@@ -119,7 +125,7 @@ class FreeplayState extends MusicBeatState
 				case 'joke':
 					addWeek(['Toilet'], 7, ['Samux']);
 					addWeek(['Ligma'], 6, ['crazy']);
-				case 'uh-oh':
+				case 'oh no':
 					addWeek(['Demolition'], 0, ['bobbbymad']);
 					addWeek(['Amolition'], 0, ['erenmad']);
 			}
@@ -133,7 +139,7 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
-			var songText:FlxText = new FlxText(0, 0, (70 * i) + 30, songs[i].songName, true, false);
+			var songText = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
 			songText.isMenuItem = false;
 			songText.itemType = "D-Shape";
 			songText.targetY = i;

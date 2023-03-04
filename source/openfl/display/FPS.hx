@@ -86,13 +86,6 @@ class FPS extends TextField
 		{
 			text = "FPS: " + currentFPS;
 
-			if (Paths.formatToSongPath(SONG.song) == 'amolition' && Paths.formatToSongPath(SONG.song) == 'demolition')
-			{
-				text = "FPS: -" + currentFPS + 81231;
-			} else {
-				text = "FPS: " + currentFPS;
-			}
-
 			#if openfl
 			currentMem = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
 			if(currentMem > highestMem)

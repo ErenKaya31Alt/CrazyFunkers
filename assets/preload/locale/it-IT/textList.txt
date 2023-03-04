@@ -1,0 +1,4 @@
+// Score Text //
+scoreText==Punto
+missesText==Manca
+accuracyText==Precisione

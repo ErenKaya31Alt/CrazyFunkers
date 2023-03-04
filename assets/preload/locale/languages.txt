@@ -1,0 +1,4 @@
+English:en-US:BLUE
+German:de-DE:ORANGE
+Italian:it-IT:GREEN
+Turkish:tr-TR:RED
