@@ -2354,15 +2354,15 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		if(ratingName == '?') {
-			scoreTxt.text = LanguageManager.getTextString('scoreText') + songScore + ' // ' + LanguageManager.getTextString('missesText') + ': ' + songMisses + ' // ' + LanguageManager.getTextString('accuracyText') + ': ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+			scoreTxt.text = 'Score: ' + songScore + ' // Misses: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 		} else {
-			scoreTxt.text = LanguageManager.getTextString('scoreText') + songScore + ' // ' + LanguageManager.getTextString('missesText') + ': ' + songMisses + ' // ' + LanguageManager.getTextString('accuracyText') + ': ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+			scoreTxt.text = 'Score: ' + songScore + ' // Misses: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 		}
 
 		if(cpuControlled) {
 			scoreTxt.text = 'BOTPLAY DETECTED';
 		} else {
-			scoreTxt.text = LanguageManager.getTextString('scoreText') + songScore + ' // ' + LanguageManager.getTextString('missesText') + ': ' + songMisses + ' // ' + LanguageManager.getTextString('accuracyText') + ': ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+			scoreTxt.text = 'Score: ' + songScore + ' // Misses: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 		} // fixed
 
         // fucking NI-

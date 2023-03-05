@@ -1,4 +1,0 @@
-// Score Text //
-scoreText==Skor
-missesText==Iskalar
-accuracyText==Kesinlik

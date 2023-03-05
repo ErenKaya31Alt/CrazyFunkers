@@ -1,4 +1,0 @@
-// Score Text //
-scoreText==Score
-missesText==Misses
-accuracyText==Accuracy
