@@ -47,5 +47,5 @@ jobs:
       - name: Publish Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: windows
+          name: OTBuild
           path: export/release/windows/bin

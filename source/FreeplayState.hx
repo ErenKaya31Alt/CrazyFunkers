@@ -46,7 +46,7 @@ class FreeplayState extends MusicBeatState
 
 	private var CurrentSongIcon:FlxSprite;
 
-	private var AllPossibleSongs:Array<String> = ["main", "extra", "joke", "oh no"];
+	private var AllPossibleSongs:Array<String> = ["main", "extra", "joke", "oh no", "covers"];
 	private var NameAlpha:Alphabet;
 
 	private var CurrentPack:Int = 0;
@@ -103,11 +103,6 @@ class FreeplayState extends MusicBeatState
 		text.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, LEFT);
 		text.scrollFactor.set();
 		add(text);
-
-		NameAlpha = new Alphabet(40,(FlxG.height / 2) - 282,AllPossibleSongs[CurrentPack],true,false);
-		NameAlpha.screenCenter(X);
-		Highscore.load();
-		add(NameAlpha);
 
 		super.create();
 	}
@@ -194,11 +189,6 @@ class FreeplayState extends MusicBeatState
 			CurrentPack = 0;
 		}
 		CurrentSongIcon.loadGraphic(Paths.image('week_icons_' + (AllPossibleSongs[CurrentPack].toLowerCase())));
-
-		NameAlpha.destroy();
-		NameAlpha = new Alphabet(40,(FlxG.height / 2) - 282,AllPossibleSongs[CurrentPack],true,false);
-		NameAlpha.screenCenter(X);
-		add(NameAlpha);
 	}
 
 	override function beatHit()
@@ -246,11 +236,9 @@ class FreeplayState extends MusicBeatState
 				loadingPack = true;
 				LoadProperPack();
 				FlxTween.tween(CurrentSongIcon, {alpha: 0}, 0.3);
-				FlxTween.tween(NameAlpha, {alpha: 0}, 0.3);
 				new FlxTimer().start(0.5, function(Dumbshit:FlxTimer)
 				{
 					CurrentSongIcon.visible = false;
-					NameAlpha.visible = false;
 					GoToActualFreeplay();
 					InMainFreeplayState = true;
 					loadingPack = false;

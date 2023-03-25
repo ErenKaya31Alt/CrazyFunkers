@@ -133,6 +133,7 @@ class PlayState extends MusicBeatState
 	public var notes:FlxTypedGroup<Note>;
 	public var unspawnNotes:Array<Note> = [];
 	public var eventNotes:Array<EventNote> = [];
+	public var camBeatSnap:Int = 4;
 
 	private var strumLine:FlxSprite;
 
@@ -232,6 +233,7 @@ class PlayState extends MusicBeatState
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
+	var timeTxtTween:FlxTween;
 
 	var aValue:Float = 20;
 
@@ -2365,6 +2367,10 @@ class PlayState extends MusicBeatState
 			scoreTxt.text = 'Score: ' + songScore + ' // Misses: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 		} // fixed
 
+		if(cpuControlled && Paths.formatToSongPath(SONG.song) == 'demolition') {
+			scoreTxt.text = 'YOUR END: ' + songScore + ' // YOUR END: ' + songMisses + ' // YOUR END: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+		}
+
         // fucking NI-
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -3227,9 +3233,7 @@ class PlayState extends MusicBeatState
 		if(achievementObj != null) {
 			return;
 		} else {
-			var achieve:String = checkForAchievement(['week1_nomiss', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss',
-				'week5_nomiss', 'week6_nomiss', 'week7_nomiss', 'ur_bad',
-				'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
+			var achieve:String = checkForAchievement(['chapter1_nomiss', 'chapter2_nomiss', 'beated_demolition', 'beated_amolition']);
 
 			if(achieve != null) {
 				startAchievement(achieve);
@@ -4303,19 +4307,6 @@ class PlayState extends MusicBeatState
 			return;
 		}
 
-		if (Paths.formatToSongPath(SONG.song) == 'freaky')
-			{
-				switch (curStep)
-				{
-					case 1412 | 1472:
-						defaultCamZoom += 0.2;
-					case 1416 | 1480:
-						defaultCamZoom += 0.4;
-					case 1424 | 1488:
-						defaultCamZoom -= 0.4;
-				}
-			}
-
 		lastStepHit = curStep;
 		setOnLuas('curStep', curStep);
 		callOnLuas('onStepHit', []);
@@ -4332,6 +4323,22 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+
+		if(curBeat % 2 == 0)
+			{
+				if(timeTxtTween != null) 
+				{
+					timeTxtTween.cancel();
+				}
+	
+				timeTxt.scale.x = 1.1;
+				timeTxt.scale.y = 1.1;
+				timeTxtTween = FlxTween.tween(timeTxt.scale, {x: 1, y: 1}, 0.2, {
+					onComplete: function(twn:FlxTween) {
+						timeTxtTween = null;
+					}
+				});
+			}
 
 		if(lastBeatHit >= curBeat) {
 			//trace('BEAT HIT: ' + curBeat + ', LAST HIT: ' + lastBeatHit);
@@ -4371,8 +4378,21 @@ class PlayState extends MusicBeatState
 			camHUD.zoom += 0.03;
 		}
 
-		iconP1.scale.set(1.2, 1.2);
-		iconP2.scale.set(1.2, 1.2);
+		if (curBeat % gfSpeed == 0) {
+			curBeat % (gfSpeed * 2) == 0 ? {
+				iconP1.scale.set(1.4, 1);
+				iconP2.scale.set(1, 1.4);
+			} : {
+				iconP1.scale.set(1, 1.4);
+				iconP2.scale.set(1.4, 1);
+			}
+
+			FlxTween.tween(iconP1, {'scale.x': 1, 'scale.y': 1}, Conductor.crochet / 1250 * gfSpeed, {ease: FlxEase.quadOut});
+			FlxTween.tween(iconP2, {'scale.x': 1, 'scale.y': 1}, Conductor.crochet / 1250 * gfSpeed, {ease: FlxEase.quadOut});
+
+			iconP1.updateHitbox();
+			iconP2.updateHitbox();
+		}
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
@@ -4552,26 +4572,16 @@ class PlayState extends MusicBeatState
 				var unlock:Bool = false;
 				switch(achievementName)
 				{
-					case 'week1_nomiss' | 'week2_nomiss' | 'week3_nomiss' | 'week4_nomiss' | 'week5_nomiss' | 'week6_nomiss' | 'week7_nomiss':
+					case 'chapter1_nomiss' | 'chapter2_nomiss':
 						if(isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
 						{
 							var weekName:String = WeekData.getWeekFileName();
 							switch(weekName) //I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
 							{
-								case 'week1':
-									if(achievementName == 'week1_nomiss') unlock = true;
-								case 'week2':
-									if(achievementName == 'week2_nomiss') unlock = true;
-								case 'week3':
-									if(achievementName == 'week3_nomiss') unlock = true;
-								case 'week4':
-									if(achievementName == 'week4_nomiss') unlock = true;
-								case 'week5':
-									if(achievementName == 'week5_nomiss') unlock = true;
-								case 'week6':
-									if(achievementName == 'week6_nomiss') unlock = true;
-								case 'week7':
-									if(achievementName == 'week7_nomiss') unlock = true;
+								case 'chapter1':
+									if(achievementName == 'chapter1_nomiss') unlock = true;
+								case 'chapter2':
+									if(achievementName == 'chapter2_nomiss') unlock = true;
 							}
 						}
 					case 'ur_bad':
@@ -4609,8 +4619,12 @@ class PlayState extends MusicBeatState
 						if(/*ClientPrefs.framerate <= 60 &&*/ ClientPrefs.lowQuality && !ClientPrefs.globalAntialiasing && !ClientPrefs.imagesPersist) {
 							unlock = true;
 						}
-					case 'debugger':
-						if(Paths.formatToSongPath(SONG.song) == 'test' && !usedPractice) {
+					case 'beated_demolition':
+						if(Paths.formatToSongPath(SONG.song) == 'demolition' && !usedPractice) {
+							unlock = true;
+						}
+					case 'beated_amolition':
+						if(Paths.formatToSongPath(SONG.song) == 'amolition' && !usedPractice) {
 							unlock = true;
 						}
 				}

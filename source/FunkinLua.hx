@@ -12,6 +12,7 @@ import flixel.input.keyboard.FlxKey;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.text.FlxText;
+import flixel.addons.text.FlxTypeText;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxPoint;
 import flixel.system.FlxSound;
@@ -54,6 +55,7 @@ class FunkinLua {
 	public var scriptName:String = '';
 	var gonnaClose:Bool = false;
 
+	var lePlayState:PlayState = null;
 	public var accessedProps:Map<String, Dynamic> = null;
 	public function new(script:String) {
 		#if LUA_ALLOWED
@@ -80,6 +82,9 @@ class FunkinLua {
 		#else
 		accessedProps = new Map<String, Dynamic>();
 		#end
+
+		var curState:Dynamic = FlxG.state;
+		lePlayState = curState;
 
 		// Lua shit
 		set('Function_Stop', Function_Stop);
@@ -620,6 +625,52 @@ class FunkinLua {
 					onComplete: function(twn:FlxTween) {
 						PlayState.instance.callOnLuas('onTweenCompleted', [tag]);
 						PlayState.instance.modchartTweens.remove(tag);
+					}
+				}));
+			}
+		});
+		Lua_helper.add_callback(lua, "noteTweenScaleX", function(tag:String, note:Int, value:Dynamic, duration:Float, ease:String) {
+			cancelTween(tag);
+			if(note < 0) note = 0;
+			var testicle:StrumNote = lePlayState.strumLineNotes.members[note % lePlayState.strumLineNotes.length];
+
+			if(testicle != null) {
+				lePlayState.notes.forEachAlive(function(spr:Note){
+					lePlayState.modchartTweens.set(tag, FlxTween.tween(spr, {"scale.x": value}, duration, {ease: getFlxEaseByString(ease),
+						onComplete: function(twn:FlxTween) {
+							lePlayState.callOnLuas('onTweenCompleted', [tag]);
+							lePlayState.modchartTweens.remove(tag);
+						}
+					}));
+				});
+				lePlayState.modchartTweens.set(tag, FlxTween.tween(testicle, {"scale.x": value}, duration, {ease: getFlxEaseByString(ease),
+					onComplete: function(twn:FlxTween) {
+						lePlayState.callOnLuas('onTweenCompleted', [tag]);
+						lePlayState.modchartTweens.remove(tag);
+					}
+				}));
+			}
+		});
+		Lua_helper.add_callback(lua, "noteTweenScaleY", function(tag:String, note:Int, value:Dynamic, duration:Float, ease:String) {
+			cancelTween(tag);
+			if(note < 0) note = 0;
+			var testicle:StrumNote = lePlayState.strumLineNotes.members[note % lePlayState.strumLineNotes.length];
+
+			if(testicle != null) {
+				lePlayState.notes.forEachAlive(function(spr:Note){
+					if(spr.noteData == note)
+						{
+							lePlayState.modchartTweens.set(tag, FlxTween.tween(spr, {"scale.y": value}, duration, {ease: getFlxEaseByString(ease),
+								onComplete: function(twn:FlxTween) {
+									lePlayState.modchartTweens.remove(tag);
+								}
+							}));
+						}
+				});
+				lePlayState.modchartTweens.set(tag, FlxTween.tween(testicle, {"scale.y": value}, duration, {ease: getFlxEaseByString(ease),
+					onComplete: function(twn:FlxTween) {
+						lePlayState.callOnLuas('onTweenCompleted', [tag]);
+						lePlayState.modchartTweens.remove(tag);
 					}
 				}));
 			}
