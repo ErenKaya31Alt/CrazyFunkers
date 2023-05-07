@@ -46,7 +46,7 @@ class FreeplayState extends MusicBeatState
 
 	private var CurrentSongIcon:FlxSprite;
 
-	private var AllPossibleSongs:Array<String> = ["main", "extra", "joke", "oh no", "covers"];
+	private var AllPossibleSongs:Array<String> = ["main", "extra", "joke", "you-are-dead"];
 	private var NameAlpha:Alphabet;
 
 	private var CurrentPack:Int = 0;
@@ -60,7 +60,8 @@ class FreeplayState extends MusicBeatState
 		0xFF1900FF, // ALEX
 		0xFFBE00AF, // MATI
 		0xFFFFFB00, // VULPIX
-		0xFFFFFFFF, // EREN
+		0xFFFFFFFF, // CRAZY GUY
+		
 		0xFF4BFD80, // SAMUX
     ];
 
@@ -121,7 +122,7 @@ class FreeplayState extends MusicBeatState
 				case 'joke':
 					addWeek(['Toilet'], 7, ['Samux']);
 					addWeek(['Ligma'], 6, ['crazy']);
-				case 'oh no':
+				case 'you-are-dead':
 					addWeek(['Demolition'], 0, ['bobbbymad']);
 					addWeek(['Amolition'], 0, ['erenmad']);
 			}

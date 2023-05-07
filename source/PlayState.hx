@@ -708,6 +708,31 @@ class PlayState extends MusicBeatState
 			introSoundsSuffix = '-pixel';
 		}
 
+		var opponentNames = dad.curCharacter;
+
+		switch (opponentNames) {
+			case 'kdj':
+				introSoundsSuffix = '-kdj';
+			case 'alex':
+				introSoundsSuffix = '-alex';
+			case 'mati':
+				introSoundsSuffix = '-mati';
+			case 'bobbby':
+				introSoundsSuffix = '-bobbby';
+			case 'romi':
+				introSoundsSuffix = '-romi';
+			case 'vulpix':
+				introSoundsSuffix = '-vulpix';
+			case 'cyan':
+				introSoundsSuffix = '-cyan';
+			case 'ikenna':
+				introSoundsSuffix = '-ikenna';
+			case 'crazy-guy':
+				introSoundsSuffix = '-crazy-guy';
+			case 'samux':
+				introSoundsSuffix = '-samux';
+		}
+
 		add(gfGroup); //Needed for blammed lights
 
 		// Shitty layering but whatev it works LOL
@@ -1101,6 +1126,7 @@ class PlayState extends MusicBeatState
 
 		// SONG SPECIFIC SCRIPTS
 		#if LUA_ALLOWED
+		
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
 
@@ -2209,6 +2235,7 @@ class PlayState extends MusicBeatState
 
 		callOnLuas('onUpdate', [elapsed]);
 
+
 		/*
 		switch(Paths.formatToSongPath(SONG.song)) {
 			case 'coolness':
@@ -2355,11 +2382,7 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		if(ratingName == '?') {
-			scoreTxt.text = 'Score: ' + songScore + ' // Misses: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
-		} else {
-			scoreTxt.text = 'Score: ' + songScore + ' // Misses: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
-		}
+		scoreTxt.text = 'Score: ' + songScore + ' // Misses: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 
 		if(cpuControlled) {
 			scoreTxt.text = 'BOTPLAY DETECTED';
