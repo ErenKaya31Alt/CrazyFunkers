@@ -706,32 +706,7 @@ class PlayState extends MusicBeatState
 
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
-		}
-
-		switch (dad.curCharacter) {
-			case 'kdj':
-				introSoundsSuffix = '-kdj';
-			case 'alex':
-				introSoundsSuffix = '-alex';
-			case 'mati':
-				introSoundsSuffix = '-mati';
-			case 'bobbby':
-				introSoundsSuffix = '-bobbby';
-			case 'romi':
-				introSoundsSuffix = '-romi';
-			case 'vulpix':
-				introSoundsSuffix = '-vulpix';
-			case 'cyan':
-				introSoundsSuffix = '-cyan';
-			case 'ikenna':
-				introSoundsSuffix = '-ikenna';
-			case 'crazy-guy':
-				introSoundsSuffix = '-crazy-guy';
-			case 'samux':
-				introSoundsSuffix = '-samux';
-			default:
-				introSoundsSuffix = '';
-		}
+		
 
 		add(gfGroup); //Needed for blammed lights
 
@@ -2382,7 +2357,11 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		scoreTxt.text = 'Score: ' + songScore + ' // Misses: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+		if(ratingName == '?') {
+			scoreTxt.text = 'Score: ' + songScore + ' // Misses: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+		} else {
+			scoreTxt.text = 'Score: ' + songScore + ' // Misses: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+		}
 
 		if(cpuControlled) {
 			scoreTxt.text = 'BOTPLAY DETECTED';
