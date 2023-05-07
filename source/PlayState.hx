@@ -1259,21 +1259,6 @@ class PlayState extends MusicBeatState
 		return value;
 	}
 
-	public function addTextToDebug(text:String) {
-		#if LUA_ALLOWED
-		luaDebugGroup.forEachAlive(function(spr:DebugLuaText) {
-			spr.y += 20;
-		});
-
-		if(luaDebugGroup.members.length > 34) {
-			var blah = luaDebugGroup.members[34];
-			blah.destroy();
-			luaDebugGroup.remove(blah);
-		}
-		luaDebugGroup.insert(0, new DebugLuaText(text, luaDebugGroup));
-		#end
-	}
-
 	public function reloadHealthBarColors() {
 		healthBar.createFilledBar(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
 			FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
