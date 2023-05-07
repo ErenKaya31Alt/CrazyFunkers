@@ -708,9 +708,7 @@ class PlayState extends MusicBeatState
 			introSoundsSuffix = '-pixel';
 		}
 
-		var opponentNames = dad.curCharacter;
-
-		switch (opponentNames) {
+		switch (dad.curCharacter) {
 			case 'kdj':
 				introSoundsSuffix = '-kdj';
 			case 'alex':
@@ -731,6 +729,8 @@ class PlayState extends MusicBeatState
 				introSoundsSuffix = '-crazy-guy';
 			case 'samux':
 				introSoundsSuffix = '-samux';
+			default:
+				introSoundsSuffix = '';
 		}
 
 		add(gfGroup); //Needed for blammed lights
