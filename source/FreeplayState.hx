@@ -121,10 +121,10 @@ class FreeplayState extends MusicBeatState
 					addWeek(['Grinder'], 5, ['Vulpix']);
 				case 'joke':
 					addWeek(['Toilet'], 7, ['Samux']);
-					addWeek(['Ligma'], 6, ['crazy']);
+					addWeek(['Ligma'], 6, ['crabi']);
 				case 'you-are-dead':
 					addWeek(['Demolition'], 0, ['bobbbymad']);
-					addWeek(['Amolition'], 0, ['erenmad']);
+					addWeek(['Ravaging'], 0, ['crabimad']);
 			}
 		}
 
@@ -463,7 +463,6 @@ public static function destroyFreeplayVocals() {
 			if (item.targetY == 0)
 			{
 				item.alpha = 1;
-				item.color = 0x00FF00;
 			}
 		}
 		changeDiff();
