@@ -28,7 +28,7 @@ using StringTools;
 class ExtrasMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
-	public static var omletsTortureVer:String = '1.5'; // ot :heart_eyes:
+	public static var omletsTortureVer:String = '1'; // ass
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
@@ -149,7 +149,7 @@ class ExtrasMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Omlets Torture v" + omletsTortureVer, 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Crazy Funkers v" + omletsTortureVer, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
